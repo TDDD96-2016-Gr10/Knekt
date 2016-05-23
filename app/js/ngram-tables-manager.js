@@ -10,36 +10,22 @@
  * @param text the new cipher text.
  */
 function updateTextNGgramTables(text) {
-    if(appState.fileIsSelected ()) {
-        var bigramContext = {
-            ngrams: getNGramCount(text, 2, 10), label: 'Bigram',
-            numType: 'Count'
-        };
-        var trigramContext = {
-            ngrams: getNGramCount(text, 3, 10), label: 'Trigram',
-            numType: 'Count'
-        };
-        handlebarExec('#ngram-table-template', '#text-bigram-table',
-            bigramContext);
-        handlebarExec('#ngram-table-template', '#text-trigram-table',
-            trigramContext);
+    var bigramContext = {label: 'Bigram', numType: 'Count'};
+    var trigramContext = {label: 'Trigram', numType: 'Count'};
+
+    if(appState.fileIsSelected()) {
+        bigramContext.ngrams = getNGramCount(text, 2, 10);
+        trigramContext.ngrams = getNGramCount(text, 3, 10);
     } else {
-        var emptyNgram = createEmptyContext(10);
-        var emptyBigramContext = {
-            ngrams: emptyNgram,
-            label: 'Bigram',
-            numType: 'Count'
-        };
-        var emptyTrigramContext = {
-            ngrams: emptyNgram,
-            label: 'Trigram',
-            numType: 'Count'
-        };
-        handlebarExec('#ngram-table-template', '#text-bigram-table',
-            emptyBigramContext);
-        handlebarExec('#ngram-table-template', '#text-trigram-table',
-            emptyTrigramContext);
+        var emptyNGrams = createEmptyContext(10);
+        bigramContext.ngrams = emptyNGrams;
+        trigramContext.ngrams = emptyNGrams;
     }
+
+    handlebarExec('#ngram-table-template', '#text-bigram-table',
+        bigramContext);
+    handlebarExec('#ngram-table-template', '#text-trigram-table',
+        trigramContext);
 }
 
 /**
