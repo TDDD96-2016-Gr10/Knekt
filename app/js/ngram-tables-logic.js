@@ -51,3 +51,16 @@ function getNGramCount(text, n, count) {
     return res.slice(0, count);
 }
 
+/**
+ * Returns a list of objects with the keys ngram and num as "-".
+ * @param length Specifies how long the list will be.
+ * @returns {Array}
+ */
+function createEmptyContext(length){
+    var ngrams = [];
+    for (var i = 0; i < length; i++) {
+        ngrams.push({ngram:"-", num:"-"});
+    }
+    return ngrams;
+}
+
