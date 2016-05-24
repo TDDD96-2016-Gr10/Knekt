@@ -1,6 +1,7 @@
 /**
  * @file Contains logic for calculating ngram occurrences.
  * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Victor Tranell <victr593@student.liu.se>
  */
 
 /**
