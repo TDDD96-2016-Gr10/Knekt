@@ -1,0 +1,19 @@
+/*
+ * @file The main .scss file. Imports all the other partial and vendor .scss
+ * files. The main.css file is included in index.html.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Kristoffer Tennivaara <krite934@student.liu.se>
+ */
+
+/* Base, eg color and font variables */
+@import "base/all";
+
+/* Component stylesheets */
+@import "components/interface";
+@import "components/transposition";
+@import "components/substitution";
+@import "components/vigenere";
+
+/* Vendor stylesheets */
+@import "vendor/dragula.css";
+@import "vendor/jquery.mCustomScrollbar.css";

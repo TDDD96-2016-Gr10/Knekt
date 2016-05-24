@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Knekt</title>
+
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <link rel="icon" href="img/favicon.png?v=2" type="image/png">
+  <link rel="shortcut icon" href="favicon.ico?v=2" type="image/x-icon">
+
+  <script src="lib/jquery-1.12.0.js"></script>
+  <script src="lib/handlebars-v4.0.5.js"></script>
+  <script src="lib/highcharts.js"></script>
+  <script src="lib/highcharts-noData.js"></script>
+  <script src="lib/dragula.js"></script>
+  <script src="lib/hashcode.js"></script>
+  <script src="lib/jquery.mCustomScrollbar.js"></script>
+
+  <script src="js/app-state.js"></script>
+  <script src="js/app-config.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/fixes.js"></script>
+  <script src="js/interface.js"></script>
+  <script src="js/view-manager.js"></script>
+
+  <script src="js/transposition-logic.js"></script>
+  <script src="js/transposition-manager.js"></script>
+
+  <script src="js/substitution-interface.js"></script>
+  <script src="js/substitution-logic.js"></script>
+  <script src="js/substitution-manager.js"></script>
+
+  <script src="js/vigenere-manager.js"></script>
+  <script src="js/vigenere-interface.js"></script>
+  <script src="js/vigenere-logic.js"></script>
+
+  <script src="js/statistics-charts-logic.js"></script>
+  <script src="js/home-manager.js"></script>
+  <script src="js/statistics-charts-manager.js"></script>
+  <script src="js/ngram-tables-logic.js"></script>
+  <script src="js/ngram-tables-manager.js"></script>
+  <script src="js/bigram-factor-logic.js"></script>
+  <script src="js/bigram-factor-manager.js"></script>
+  <script src="js/about.js"></script>
+
+  <script src="js/app-init.js"></script>e
+</head>
+<body>
+
+<!-- The navigation bar to the left in the application view
+ note: the parameters to viewChange are tightly coupled with their ID's
+ further down on the page -->
+<div id="navbar">
+  <div id="logo-wrapper" onclick="viewChange('home-view', this);">
+    <img id="logotype" src="img/Logo.png" alt="">
+  </div>
+  <br>
+  <br>
+  <ul id="tool-button-list">
+    <li>
+      <button id="subst-tool-button" class="tool-button"
+              onclick="viewChange('subst-tool', this);">
+        Substitution
+      </button>
+    </li>
+    <li>
+      <button id="trans-tool-button" class="tool-button"
+              onclick="viewChange('trans-tool', this);">
+        Transposition
+      </button>
+    </li>
+    <li>
+      <button id="vig-tool-button" class="tool-button"
+              onclick="viewChange('vig-tool', this);">
+        Vigenère
+      </button>
+    </li>
+  </ul>
+
+  <div id="file-section">
+    <script id="file-select-template" type="text/x-handlebars-template">
+      <form id="file-form">
+        <label for="file-select">
+          <img src="img/ic_description_white_24dp_1x.png" alt="File">
+        </label>
+        <select name="File" id="file-select" onchange="settingsChange('file')">
+          <option selected disabled>None</option>
+          {{#number}}
+          <option value="{{this}}.cry">{{this}}.cry</option>
+          {{/number}}
+        </select>
+      </form>
+    </script>
+  </div>
+
+  <form id="lang-form">
+    <label for="lang-select">
+      <img src="img/ic_public_white_24dp_1x.png" alt="Language">
+    </label>
+    <select name="Language" id="lang-select" onchange="settingsChange('lang')">
+      <option value="en">English</option>
+      <option value="sv">Swedish</option>
+    </select>
+  </form>
+
+  <button id="apply-button" onclick="appState.applySettings()" disabled>
+    Apply settings
+  </button>
+
+  <div>
+    <button id="about-button">About</button>
+  </div>
+</div>
+
+<!-- The cipher tool view -->
+<div id="cipher-tool">
+
+  <div id="subst-tool">
+    <script id="message-divs-hbs" type="text/x-handlebars-template">
+      {{#each row}}
+      <p class="encr-msg-row">{{encrypted}}</p>
+      <p class="decr-msg-row">{{decrypted}}</p>
+      {{/each}}
+    </script>
+
+    <div id="subst-tool-wrapper">
+      <div>
+        <div id="message-divs">no file loaded</div>
+
+        <div id="subst-alphabets">
+          <div>
+            <script id="orig-alphabet-hbs" type="text/x-handlebars-template">
+              {{#each letters}}
+              <span draggable="true" ondragstart="substDrag(event)">{{this}}</span>
+              {{/each}}
+            </script>
+
+            <script id="crypto-alphabet-hbs" type="text/x-handlebars-template">
+              {{#each letters}}
+              <span contenteditable="true" ondrag="event.preventDefault();"
+                    ondrop="substDrop(event)" ondragover="event.preventDefault();"
+              >{{this}}</span>
+              {{/each}}
+            </script>
+
+            <div class="text-wrapper"> Plain alphabet </div>
+            <div id="plain-cryptobet">
+              <div class="normal-alphabet"></div>
+              <div class="alphabet-editable" id="plain-alphabet"></div>
+            </div>
+
+            <br><br>
+
+            <div class="text-wrapper"> Encrypted alphabet </div>
+            <div id="crypto-plainbet">
+              <div class="alphabet-editable" id="crypto-alphabet"></div>
+              <div class="normal-alphabet"></div>
+            </div>
+          </div>
+          <div id="subst-button-wrapper" class="reset-button-wrapper">
+            <button id="button-reset-subst" class="reset-button"
+                    onclick="substResetTool('resetDecrypted')">Reset tool
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="trans-tool">
+    <script id="trans-col-template" type="text/x-handlebars-template">
+      {{#column}}
+      <div class="trans-column" data-index="{{number}}">
+        <div class="column-number">{{number}}</div>
+        <div class="column-letters">
+          {{#letters}}
+          {{this}}<br>
+          {{/letters}}
+        </div>
+      </div>
+      {{/column}}
+    </script>
+
+    <div id="trans-button-wrapper">
+      <div>
+        <button id="button-minus" class="trans-button"
+                onclick="columnIncrDecr(-1)">Remove column
+        </button>
+        <button id="button-plus" class="trans-button"
+                onclick="columnIncrDecr(1)">Add column
+        </button>
+      </div>
+    </div>
+
+    <div id="column-container-wrapper">
+      <div id="column-container" class="container">No file loaded</div>
+    </div>
+
+    <div id="trans-result-wrapper">
+      <textarea id="trans-result" readonly></textarea>
+      <div id="reset-trans-button-wrapper" class="reset-button-wrapper">
+        <button id="button-reset" class="reset-button"
+                onclick="resetTransTool()">Reset tool
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div id="vig-tool">
+
+    <script id="vigenere-key-hbs" type="text/x-handlebars-template">
+      {{#each keyLetter}}
+        <span class='vigenere-key' contenteditable data-key-index="{{@index}}">{{this}}</span>
+      {{/each}}
+    </script>
+
+    <div id="vig-result-wrapper">
+      <textarea id="vig-result" readonly>
+        resultattext
+      </textarea>
+    </div>
+
+    <div id="vig-tool-wrapper">
+      <div id="vig-key-area">
+        <div id="vig-buttons">
+          <div class="button-plus" onclick="vigKeyLenAdjust(1)">+</div>
+          <div class="button-minus" onclick="vigKeyLenAdjust(-1)">-</div>
+        </div>
+        <div id="vig-key"></div>
+      </div>
+      <div id="vig-graph-area">
+        <div class="vig-inner-graph-area">
+          <div class="vig-shift-button vig-left-shift-button"></div>
+          <div class="vig-highchart" id="vig-movable-graph"></div>
+          <div class="vig-shift-button vig-right-shift-button"></div>
+        </div>
+        <div class="vig-inner-graph-area">
+            <div class="vig-highchart" id="vig-fixed-graph"></div>
+        </div>
+        <div id="vig-button-reset-wrapper" class="reset-button-wrapper">
+          <button id="vig-button-reset" class="reset-button" onclick="resetVigenere()">Reset tool</button>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div id="home-view">
+    <span id="home-no-file">No file loaded</span>
+    <textarea id="home-text-area" readonly></textarea>
+  </div>
+
+</div>
+
+<!-- The line separating the cipher tool from the utils bar -->
+<div id="line"></div>
+
+<!-- Utils bar -->
+<div id="util-bar">
+  <div id="util-tools" class="graph-area">
+
+    <div id="language-stats-area-container" class="graph-container">
+      <div class="graph-container-header"
+           onclick="expandCollapseGraph(this)">
+        <div class="arrow-right"></div>
+        Language letter statistics
+      </div>
+      <div class="graph-container-content">
+        <div id="language-stats-area" class="graph-stats"></div>
+      </div>
+    </div>
+
+    <div id="crypto-stats-area-container" class="graph-container">
+      <div class="graph-container-header"
+           onclick="expandCollapseGraph(this)">
+        <div class="arrow-right"></div>
+        Text letter statistics
+      </div>
+      <div class="graph-container-content">
+        <div id="crypto-stats-area" class="graph-stats"></div>
+      </div>
+    </div>
+
+    <!-- Table template for n-gram tables -->
+    <script id="ngram-table-template" type="text/x-handlebars-template">
+      <table>
+        <tbody>
+        <tr>
+          <th>{{label}}</th>
+          {{#each ngrams}}
+          <td>{{ngram}}</td>
+          {{/each}}
+        </tr>
+        <tr>
+          <th>{{numType}}</th>
+          {{#each ngrams}}
+          <td>{{num}}</td>
+          {{/each}}
+        </tr>
+        </tbody>
+      </table>
+    </script>
+
+    <div id="language-bigram-container" class="graph-container">
+      <div class="graph-container-header"
+           onclick="expandCollapseGraph(this)">
+        <div class="arrow-right"></div>
+        Language bigram statistics
+      </div>
+      <div class="graph-container-content">
+        <div id="language-bigram-table"></div>
+      </div>
+    </div>
+
+    <div id="text-bigram-container" class="graph-container">
+      <div class="graph-container-header"
+           onclick="expandCollapseGraph(this)">
+        <div class="arrow-right"></div>
+        Text bigram statistics
+      </div>
+      <div class="graph-container-content">
+        <div id="text-bigram-table"></div>
+      </div>
+    </div>
+
+    <div id="language-trigram-container" class="graph-container">
+      <div class="graph-container-header"
+           onclick="expandCollapseGraph(this)">
+        <div class="arrow-right"></div>
+        Language trigram statistics
+      </div>
+      <div class="graph-container-content">
+        <div id="language-trigram-table"></div>
+      </div>
+    </div>
+
+    <div id="text-trigram-container" class="graph-container">
+      <div class="graph-container-header"
+           onclick="expandCollapseGraph(this)">
+        <div class="arrow-right"></div>
+        Text trigram statistics
+      </div>
+      <div class="graph-container-content">
+        <div id="text-trigram-table"></div>
+      </div>
+    </div>
+
+    <div id="bigram-factor-container" class="graph-container">
+      <div class="graph-container-header"
+           onclick="expandCollapseGraph(this)">
+        <div class="arrow-right"></div>
+        Bigram distance counter
+      </div>
+      <div class="graph-container-content">
+        <div id="bigram-factor-area">
+          <script id="bigram-factor-table-template" type="text/x-handlebars-template">
+            <table>
+              <tbody>
+              <tr>
+                <th>Distance</th>
+                {{#each bigram}}
+                <td>{{nr}}</td>
+                {{/each}}
+              </tr>
+              <tr>
+                <th>Count</th>
+                {{#each bigram}}
+                <td>{{count}}</td>
+                {{/each}}
+              </tr>
+              </tbody>
+            </table>
+          </script>
+          <div id="bigram-factor-table"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="about-overlay">
+  <button id="about-close-button">&times;</button>
+  <div id="about-content">
+    <h2>Knekt</h2>
+    <p>
+      Knekt was developed by a group of students at Linköping University as
+      their Bachelor's project during the spring of 2016.
+    </p>
+    <h2>FAQ</h2>
+    <p>
+      <b>Why is the application called Knekt?</b><br>
+      Because Knekt is pronounced in the same way as the Swedish word
+      "knäckt", which translates into cracked. This so happens to be exactly
+      what the encrypted texts should be after having faced this application
+      coupled with your excellent decryption skills.
+    </p>
+
+    <h2>Project Members</h2>
+    <p>
+      Fredrik Bergstrand, Kimberley French, Rebecka Geijer Michaeli,
+      Eric Henziger, Oscar Johansson, Robert Kumpulainen, Erik Rönmark,
+      Kristoffer Tennivaara, Victor Tranell.
+    </p>
+  </div>
+</div>
+
+</body>
+</html>

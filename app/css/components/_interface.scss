@@ -1,0 +1,380 @@
+/**
+ * @file The main scss file for index.html. Compiles into interface.css.
+ * @author Oscar Johansson <oscjo411@student.liu.se>
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Robert Kumpulainen <robku937@student.liu.se>
+ * @author Eric Henziger <erihe763@student.liu.se>
+ * @author Victor Tranell <victr593@student.liu.se>
+ * @author Kristoffer Tennivaara <krite934@student.liu.se>
+ * @author Kimberley French <kimfr230@student.liu.se>
+ */
+
+@import "../base/all";
+
+/* Defines variables used in JavaScript */
+:root{
+  --chartFont: $font-stack; // Set font used in high chart
+  --bar-color: #8dd2a3; // Bar color, currently same as graph_header
+}
+
+/* Use the whole screen and prevent scroll bar from appear */
+body, html {
+  height: 100%;
+  overflow: hidden;
+  background: $color-primary-2;
+  font-family: $font-stack;
+
+  /*text unselectable */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Adds a shadow between browser-bar and our website */
+body:before {
+  content: "";
+  position: fixed;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  z-index: 4;
+  /* dropshadows, for different browsers */
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8); }
+
+
+/* Hides the tools at start-up */
+#subst-tool, #trans-tool, #vig-tool {
+  display: none;
+}
+
+#navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10%;
+  height: 100%;
+  background-color: $color-primary-3;
+}
+
+.reset-button {
+  font-family: $font-stack;
+  font-size: 14px;
+  text-transform: none;
+  margin: 10px 0 10px 0;
+  width: 10em;
+  height: 2em;
+  display: block;
+}
+
+.reset-button-wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 99%;
+  height: 10vh;
+  bottom: 0;
+  right: 0;
+}
+
+#tool-button-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tool-button:hover{
+  background: $color-primary-1;
+  font-weight: bold;
+}
+
+.tool-button {
+  width: 105%;
+  height: 3em;
+  background: $color-primary-0;
+  color: white;
+  font-size: 16px;
+  font-family: $font-stack;
+  outline: none;
+  border: 1px solid $color-primary-3;
+}
+
+.tool-button-active:hover{
+  background-color: $color-primary-2;
+  font-weight: normal;
+}
+
+.tool-button-active {
+  color: black;
+  background-color: $color-primary-2;
+}
+
+#file-form, #lang-form {
+  padding: 15px 0 15px 5px;
+  color: white;
+  font-family: $font-stack;
+}
+
+#file-section {
+  padding: 2em 0 0 0;
+}
+
+#file-select, #lang-select {
+  float: right;
+  margin: 0 5px 0 0;
+  width: 7em;
+  font-family: $font-stack;
+}
+
+.changed-setting {
+  color: orangered;
+}
+
+.last-setting {
+  font-weight: bold;
+  color: black;
+}
+
+#apply-button {
+  display: block;
+  margin: 1em auto;
+}
+
+/* The placeholder for the different cipher-tools */
+#cipher-tool {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  height: 100%;
+  width: 55%;
+  background-color: $color-primary-2;
+  overflow: hidden; /* Don't let inside content get outside this div */
+}
+
+#util-bar {
+  position: absolute;
+  margin: 0 auto;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 34.85%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background-color: $color-primary-2;
+}
+
+/* The area where all graphs are placed */
+#util-tools {
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 2%;
+  height: 100%;
+  width: 97%;
+}
+
+/* images undraggable*/
+img {
+  pointer-events: none;
+}
+
+#line {
+  background: $color-primary-3;
+  content: " ";
+  position: absolute;
+  width: 0.15%;
+  right: 34.85%;
+  height: 98%;
+  top: 1%;
+  border-radius: 8px;
+}
+
+th {
+  background-color: $color-primary-3;
+  color: white;
+  width: 15%;
+}
+
+tr {
+  padding: 0;
+  margin: auto;
+  background-color: white;
+}
+
+// Note: the mCSB* CSS classes need names like this because of limitations in
+// the library. The ids with corresponding DOM elements are created dynamically
+// at runtime by the library.
+
+/* This is the div (scrollbox) that the scroll is using inside util-tools */
+#mCSB_2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
+/* This is where our content is, our graphs. */
+#mCSB_2_container {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+}
+
+/* This is the custom scrollbar for util-tools. */
+#mCSB_2_scrollbar_vertical{
+  margin: 4px 3px 4px 0;
+}
+
+
+/* The text area used to initially present the chosen cipher text */
+#home-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+#home-text-area {
+  display: none;
+  font-size: $crypto-text-font-size;
+  width: 40%;
+  height: 30%;
+  padding: 5px;
+}
+
+th, tr {
+  font-family: $font-stack;
+  font-weight: bold;
+  height: 30px;
+  font-size: 13px;
+}
+
+table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.graph-container {
+  padding-top: 15px;
+}
+
+.graph-container-header {
+  border: 1px solid black;
+  padding-top: 10px;
+  height: 30px;
+  font-size: 16px;
+  font-family: $font-stack;
+  color: white;
+  cursor: pointer;
+  margin: auto;
+  width: 100%;
+  background-color: $color-primary-0;
+  text-align : center;
+}
+
+.graph-container-header:hover{
+  background: #4d99cb;
+  font-weight: bold;
+}
+
+#logotype{
+  width: 100%;
+  padding-top: 5vh;
+}
+
+
+.graph-container-content{
+  width: 100%;
+  display: none;
+  font-family: $font-stack;
+  margin: auto;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  overflow-x: hidden ;
+}
+
+.graph-stats {
+  width: 100%;
+  height: 200px;
+}
+
+.arrow-right {
+  display: inline;
+  margin-left: 10px; //Must be margin-left of arrow-down*2 to stay still
+  float:left;
+  width: 0;
+  height: 0;
+  border-top: 10px solid rgba(255, 255, 255, 0);
+  border-bottom: 10px solid rgba(255, 255, 255, 0);
+  border-left: 15px solid white;
+  -moz-transform: scale(.9999); //To smooth the edge in firefox 38
+}
+
+.arrow-down {
+  display: inline;
+  margin-left: 5px;
+  margin-top: 5px;
+  float: left;
+  width: 0;
+  height: 0;
+  border-left: 10px solid rgba(255, 255, 255, 0);
+  border-right: 10px solid rgba(255, 255, 255, 0);
+  border-top: 15px solid white;
+  -moz-transform: scale(.9999); //To smooth the edge in firefox 38
+}
+
+#about-close-button {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 20px;
+  margin: 0 -4px 0 0;
+  border: 0 solid transparent;
+  background-color: transparent;
+}
+
+#about-button {
+  position: absolute;
+  left: 3px;
+  bottom: 5px;
+  background-color: transparent;
+  color: $color-primary-5;
+  border: 0;
+}
+
+#about-button:hover {
+  color: $color-primary-2;
+}
+
+#about-overlay {
+  display: none;
+  position: absolute;
+  width: 32%;
+  height: 60%;
+  top: 20%;
+  left: 34%;
+  background-color: $color-primary-2;
+  border-radius: 10px;
+  box-shadow: 0 0 0 3000px rgba(0, 0, 0, .5);
+  z-index: 1;
+}
+
+#about-content {
+  font-family: $font-stack;
+  color: $color-primary-4;
+  padding: 10px;
+}

@@ -1,0 +1,214 @@
+/**
+* @file Styling file for Vigenere tool
+* @author Rebecka Geijer Michaeli <rebge882@student.liu.se>
+* @author Robert Kumpulainen <robku937@student.liu.se>
+* @author Kimberley French <kimfr230@student.liu.se>
+*/
+
+@import "../base/all";
+
+
+#vig-tool-wrapper{
+  @include content-wrapper;
+  @include abs-pos(25%, 0, 0, 0);
+  margin: 5px 10px 10px 10px;
+  overflow-y: hidden;
+}
+
+#vig-result {
+  resize: none;
+  height: 70%;
+  width: 70%;
+  font-size: $crypto-text-font-size;
+}
+
+#vig-result-wrapper{
+  @include content-wrapper;
+  @include abs-pos(0, 0, 75%, 0);
+  margin: 10px 10px 5px 10px;
+  display: flex;
+}
+
+#vig-key-area {
+  width: 70%;
+  margin: 2% 14% 2% 16%;
+}
+
+#vig-key-area > div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+#vig-buttons {
+  width: 7%;
+}
+
+#vig-buttons > div {
+  margin-bottom: 3px;
+  line-height: 1.7em;
+  box-sizing: border-box;
+  background: #e3e3e8;
+  background: -moz-linear-gradient(#f1f1f4, $color-primary-2);
+  background: linear-gradient(#f1f1f4, $color-primary-2);
+  border: 1px solid #999999;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  font-size: larger;
+  font-weight: bold;
+}
+
+#vig-buttons > div:hover {
+  border: 1px solid #737373;
+}
+
+#vig-buttons > div:active{
+  background: $color-primary-2;
+  background: -moz-linear-gradient($color-primary-2, #f1f1f4);
+  background: linear-gradient($color-primary-2, #f1f1f4);
+}
+
+#vig-button-reset-wrapper {
+  position: relative;
+  top: 0;
+  right: 0;
+}
+
+.button-plus {
+  position: relative;
+  float: top;
+}
+
+.button-minus {
+  position: relative;
+  float: bottom;
+}
+
+#vig-key {
+  width: 90%;
+}
+
+.vigenere-key {
+  background: $color-primary-0;
+  border: 1px solid $color-primary-3;
+  width: 4vw;
+  height: 4vw;
+  display: table-cell; /* for the pretty lined up boxes */
+  box-sizing: border-box; /* one, here comes the resizing combo */
+  vertical-align: middle; /* second */
+  resize: none; /* three, does the trick */
+  text-align: center;
+}
+
+.vigenere-key:hover {
+  border: 1px solid $color-primary-4;
+  background: $color-primary-1;
+}
+
+.vig-active-letter {
+  background: $color-primary-1;
+  outline: 0px solid transparent;
+}
+
+.vig-active-letter:hover {
+  border: 1px solid $color-primary-3;
+}
+
+#vig-graph-area {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.vig-inner-graph-area {
+  width: 100%;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#vig-movable-graph{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.vig-inner-graph-area > div {
+  display: inline-block;
+}
+
+.vig-shift-button {
+  width: 10%;
+  height: 8.0em;
+  line-height: 8.0em;
+}
+
+.vig-left-shift-button{
+  width: 0;
+  height: 0;
+  border-top: 10vh solid transparent;
+  border-bottom: 10vh solid transparent;
+  border-right:30px solid $color-primary-1;
+}
+
+.vig-right-shift-button{
+  width: 0;
+  height: 0;
+  border-top: 10vh solid transparent;
+  border-bottom: 10vh solid transparent;
+  border-left: 30px solid $color-primary-1;
+}
+
+.blur-active {
+  opacity: 0.8;
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px);
+}
+
+.vig-left-shift-button:not(.blur-active):hover{
+  border-right:30px solid $color-primary-5; //#b6b6c8;
+}
+
+.vig-right-shift-button:not(.blur-active):hover {
+  border-left: 30px solid $color-primary-5; //#b6b6c8;
+}
+
+.vig-highchart {
+  height: 25vh;
+  width: 70%;
+}
+
+/* fixes highchart overflow in bottom graph */
+.highcharts-container {
+  width:100% !important; /* fixme/todo: do not use !important */
+  height:100% !important;
+  overflow: hidden;
+}
+
+// Note: the mCSB* CSS classes need names like this because of limitations in
+// the library. The ids with corresponding DOM elements are created dynamically
+// at runtime by the library.
+
+/* This is the div (scrollbox) that the scroll is using inside util-tools */
+#mCSB_3 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
+/* This is where our content is, our graphs. */
+#mCSB_3_container {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  right: 0;
+}
+
+/* This is the custom scrollbar for util-tools. */
+#mCSB_3_scrollbar_vertical{
+  margin: 4px 3px 4px 0;
+}

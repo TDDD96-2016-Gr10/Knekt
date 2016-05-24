@@ -1,0 +1,123 @@
+/**
+ * @file Contains style definitions for the transposition tool.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Kristoffer Tennivaara <krite934@student.liu.se>
+ * @author Kimberley French <kimfr230@student.liu.se>
+ */
+
+@import "../base/all";
+
+#trans-button-wrapper {
+  @include content-wrapper;
+  @include abs-pos(0, 0, 70%, 55%);
+  margin: 10px 10px 5px 5px;
+  display: flex;
+}
+
+#column-container-wrapper {
+  @include content-wrapper;
+  @include abs-pos(0, 45%, 0, 0);
+  margin: 10px 5px 10px 10px;
+  overflow-y: auto;
+  display: flex;
+}
+
+#trans-result {
+  width: 90%;
+  height: 60%;
+  font-size: $crypto-text-font-size;
+  resize: none;
+}
+
+#trans-result-wrapper {
+  @include content-wrapper;
+  @include abs-pos(30%, 0, 0, 55%);
+  margin: 5px 10px 10px 5px;
+  display: flex;
+}
+
+.trans-button {
+  font-family: $font-stack;
+  font-size: 14px;
+  margin: 10px 0 10px 0;
+  width: 12em;
+  height: 2em;
+  display: block;
+}
+
+.trans-column {
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  line-height: 1;
+  text-align: center;
+  float: left;
+  text-space: 10px;
+  background: $color-primary-0;
+  border: 1px solid #27556C; //$color-primary-3;
+  width: 2.5vw;
+  box-shadow: 4px 4px 3px #333333;
+  margin: 5px 4px 5px 4px;
+}
+
+.trans-column:hover {
+  border: 1px solid $color-primary-4;
+  background: $color-primary-1;
+}
+
+#column-container {
+  max-height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.column-number {
+  background: #e3e3e8;
+  background: -moz-linear-gradient(#f1f1f4, #dcdce3);
+  background: linear-gradient(#f1f1f4, #dcdce3);
+  border-bottom: 1px solid #27556C;
+  line-height: 2;
+  text-align: center;
+}
+
+.column-letters {
+  padding: 10px 0 10px 0;
+}
+
+// Note: the mCSB* CSS classes need names like this because of limitations in
+// the library. The ids with corresponding DOM elements are created dynamically
+// at runtime by the library.
+
+/* This is the div (scrollbox) that the scroll is using. */
+#mCSB_1 {
+  display: inline-block;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
+/* This is where our content is, columns inside the transposition tool. */
+#mCSB_1_container {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* This is the custom scrollbar for transposition tool. */
+#mCSB_1_scrollbar_vertical {
+  margin: 4px 3px 4px 0;
+}
+
+/* A fake (pseudo) element to align the content vertically */
+#mCSB_1:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%;
+}

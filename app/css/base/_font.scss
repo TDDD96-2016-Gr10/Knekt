@@ -1,0 +1,17 @@
+/*
+ * @file Contains the application font style.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+
+@font-face {
+  font-family: NotoSansBold;
+  // This url is correct, the url is relative to main.css which is the result
+  // of the SASS compilation.
+  src: url("../font/noto-sans-bold.ttf");
+}
+
+$font-stack: NotoSansBold, Arial;
+
+// Sets the size of the text in the text boxes displaying crypto text and
+// the result of different tools.
+$crypto-text-font-size: 16px;

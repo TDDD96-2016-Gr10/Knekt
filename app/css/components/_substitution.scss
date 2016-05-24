@@ -1,0 +1,110 @@
+/**
+ * @file Contains style definitions for the substitution tool
+ * @author Eric Henziger <erihe763@student.liu.se>
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Robert Kumpulainen <robku937@student.liu.se>
+ * @author Kimberley French <kimfr230@student.liu.se>
+ */
+
+@import "../base/all";
+
+#subst-tool {
+  font-family: monospace;
+  text-transform: uppercase;
+  width: 100%;
+  height: 100%;
+}
+
+#subst-tool-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+}
+
+#message-divs, #subst-alphabets{
+  position: relative;
+  background-color: #d4d4dd;
+  -moz-box-shadow:    inset 0 0 10px #404040;
+  -webkit-box-shadow: inset 0 0 10px #404040;
+  box-shadow:         inset 0 0 10px #404040;
+  padding: 40px;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+#message-divs {
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-align: center;
+  font-size: 14px;
+}
+
+#subst-alphabets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 10px;
+  padding-bottom: 100px;
+}
+
+/* that is, all spans that are children of divs from #subst-alphabets */
+#subst-alphabets div > span {
+  width: 1.3em;
+  height: 1.3em;
+  display: table-cell; /* for the pretty lined up boxes */
+  box-sizing: border-box; /* one, here comes the resizing combo */
+  vertical-align: middle; /* second */
+  resize: none; /* three, does the trick */
+  text-align: center;
+}
+
+.normal-alphabet span {
+  background: $color-primary-0;
+  border: 1px solid $color-primary-3;
+}
+
+.normal-alphabet span:hover {
+  border: 1px solid $color-primary-4;
+  background: $color-primary-1;
+}
+
+.normal-alphabet span:active{
+  background: $color-primary-1;
+}
+
+.alphabet-editable span {
+  border: 1px solid #808080;
+  background: #f1f1f4;
+  color: $color-primary-0;
+}
+
+.decr-msg-row {
+  color: $color-primary-0;
+}
+
+.transparent-letter {
+  transition: opacity 0.5s linear;
+  opacity: 0.3;
+}
+
+#subst-alphabets .redBackground {
+  background: orangered;
+  transition: background 0.6s linear;
+}
+
+.defaultBackground {
+  background: default;
+  transition: background 2.0s linear;
+}
+
+.text-wrapper {
+  font-family: $font-stack;
+  font-size: 14px;
+  text-transform: none;
+  font-weight: bold;
+  color: $color-primary-4;
+}

@@ -1,0 +1,865 @@
+/*
+ * @file The main .scss file. Imports all the other partial and vendor .scss
+ * files. The main.css file is included in index.html.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Kristoffer Tennivaara <krite934@student.liu.se>
+ */
+/* Base, eg color and font variables */
+/*
+ * @file Importing this module gives access to all modules.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application color palette.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application font style.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+@import url(vendor/dragula.css);
+@import url(vendor/jquery.mCustomScrollbar.css);
+@font-face {
+  font-family: NotoSansBold;
+  src: url("../font/noto-sans-bold.ttf"); }
+/* Component stylesheets */
+/**
+ * @file The main scss file for index.html. Compiles into interface.css.
+ * @author Oscar Johansson <oscjo411@student.liu.se>
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Robert Kumpulainen <robku937@student.liu.se>
+ * @author Eric Henziger <erihe763@student.liu.se>
+ * @author Victor Tranell <victr593@student.liu.se>
+ * @author Kristoffer Tennivaara <krite934@student.liu.se>
+ * @author Kimberley French <kimfr230@student.liu.se>
+ */
+/*
+ * @file Importing this module gives access to all modules.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application color palette.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application font style.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+@font-face {
+  font-family: NotoSansBold;
+  src: url("../font/noto-sans-bold.ttf"); }
+/* Defines variables used in JavaScript */
+:root {
+  --chartFont: NotoSansBold, Arial;
+  --bar-color: #8dd2a3; }
+
+/* Use the whole screen and prevent scroll bar from appear */
+body, html {
+  height: 100%;
+  overflow: hidden;
+  background: #dcdce3;
+  font-family: NotoSansBold, Arial;
+  /*text unselectable */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+/* Adds a shadow between browser-bar and our website */
+body:before {
+  content: "";
+  position: fixed;
+  top: -10px;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  z-index: 4;
+  /* dropshadows, for different browsers */
+  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.8); }
+
+/* Hides the tools at start-up */
+#subst-tool, #trans-tool, #vig-tool {
+  display: none; }
+
+#navbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 10%;
+  height: 100%;
+  background-color: #2b343d; }
+
+.reset-button {
+  font-family: NotoSansBold, Arial;
+  font-size: 14px;
+  text-transform: none;
+  margin: 10px 0 10px 0;
+  width: 10em;
+  height: 2em;
+  display: block; }
+
+.reset-button-wrapper {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 99%;
+  height: 10vh;
+  bottom: 0;
+  right: 0; }
+
+#tool-button-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+
+.tool-button:hover {
+  background: #4d99cb;
+  font-weight: bold; }
+
+.tool-button {
+  width: 105%;
+  height: 3em;
+  background: #3585b9;
+  color: white;
+  font-size: 16px;
+  font-family: NotoSansBold, Arial;
+  outline: none;
+  border: 1px solid #2b343d; }
+
+.tool-button-active:hover {
+  background-color: #dcdce3;
+  font-weight: normal; }
+
+.tool-button-active {
+  color: black;
+  background-color: #dcdce3; }
+
+#file-form, #lang-form {
+  padding: 15px 0 15px 5px;
+  color: white;
+  font-family: NotoSansBold, Arial; }
+
+#file-section {
+  padding: 2em 0 0 0; }
+
+#file-select, #lang-select {
+  float: right;
+  margin: 0 5px 0 0;
+  width: 7em;
+  font-family: NotoSansBold, Arial; }
+
+.changed-setting {
+  color: orangered; }
+
+.last-setting {
+  font-weight: bold;
+  color: black; }
+
+#apply-button {
+  display: block;
+  margin: 1em auto; }
+
+/* The placeholder for the different cipher-tools */
+#cipher-tool {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  height: 100%;
+  width: 55%;
+  background-color: #dcdce3;
+  overflow: hidden;
+  /* Don't let inside content get outside this div */ }
+
+#util-bar {
+  position: absolute;
+  margin: 0 auto;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 34.85%;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background-color: #dcdce3; }
+
+/* The area where all graphs are placed */
+#util-tools {
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 2%;
+  height: 100%;
+  width: 97%; }
+
+/* images undraggable*/
+img {
+  pointer-events: none; }
+
+#line {
+  background: #2b343d;
+  content: " ";
+  position: absolute;
+  width: 0.15%;
+  right: 34.85%;
+  height: 98%;
+  top: 1%;
+  border-radius: 8px; }
+
+th {
+  background-color: #2b343d;
+  color: white;
+  width: 15%; }
+
+tr {
+  padding: 0;
+  margin: auto;
+  background-color: white; }
+
+/* This is the div (scrollbox) that the scroll is using inside util-tools */
+#mCSB_2 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 0;
+  top: 0; }
+
+/* This is where our content is, our graphs. */
+#mCSB_2_container {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  right: 0; }
+
+/* This is the custom scrollbar for util-tools. */
+#mCSB_2_scrollbar_vertical {
+  margin: 4px 3px 4px 0; }
+
+/* The text area used to initially present the chosen cipher text */
+#home-view {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%; }
+
+#home-text-area {
+  display: none;
+  font-size: 16px;
+  width: 40%;
+  height: 30%;
+  padding: 5px; }
+
+th, tr {
+  font-family: NotoSansBold, Arial;
+  font-weight: bold;
+  height: 30px;
+  font-size: 13px; }
+
+table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.graph-container {
+  padding-top: 15px; }
+
+.graph-container-header {
+  border: 1px solid black;
+  padding-top: 10px;
+  height: 30px;
+  font-size: 16px;
+  font-family: NotoSansBold, Arial;
+  color: white;
+  cursor: pointer;
+  margin: auto;
+  width: 100%;
+  background-color: #3585b9;
+  text-align: center; }
+
+.graph-container-header:hover {
+  background: #4d99cb;
+  font-weight: bold; }
+
+#logotype {
+  width: 100%;
+  padding-top: 5vh; }
+
+.graph-container-content {
+  width: 100%;
+  display: none;
+  font-family: NotoSansBold, Arial;
+  margin: auto;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  border-left: 1px solid black;
+  overflow-x: hidden; }
+
+.graph-stats {
+  width: 100%;
+  height: 200px; }
+
+.arrow-right {
+  display: inline;
+  margin-left: 10px;
+  float: left;
+  width: 0;
+  height: 0;
+  border-top: 10px solid rgba(255, 255, 255, 0);
+  border-bottom: 10px solid rgba(255, 255, 255, 0);
+  border-left: 15px solid white;
+  -moz-transform: scale(0.9999); }
+
+.arrow-down {
+  display: inline;
+  margin-left: 5px;
+  margin-top: 5px;
+  float: left;
+  width: 0;
+  height: 0;
+  border-left: 10px solid rgba(255, 255, 255, 0);
+  border-right: 10px solid rgba(255, 255, 255, 0);
+  border-top: 15px solid white;
+  -moz-transform: scale(0.9999); }
+
+#about-close-button {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  font-size: 20px;
+  margin: 0 -4px 0 0;
+  border: 0 solid transparent;
+  background-color: transparent; }
+
+#about-button {
+  position: absolute;
+  left: 3px;
+  bottom: 5px;
+  background-color: transparent;
+  color: #7CB5EC;
+  border: 0; }
+
+#about-button:hover {
+  color: #dcdce3; }
+
+#about-overlay {
+  display: none;
+  position: absolute;
+  width: 32%;
+  height: 60%;
+  top: 20%;
+  left: 34%;
+  background-color: #dcdce3;
+  border-radius: 10px;
+  box-shadow: 0 0 0 3000px rgba(0, 0, 0, 0.5);
+  z-index: 1; }
+
+#about-content {
+  font-family: NotoSansBold, Arial;
+  color: #081E29;
+  padding: 10px; }
+
+/**
+ * @file Contains style definitions for the transposition tool.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Kristoffer Tennivaara <krite934@student.liu.se>
+ * @author Kimberley French <kimfr230@student.liu.se>
+ */
+/*
+ * @file Importing this module gives access to all modules.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application color palette.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application font style.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+@font-face {
+  font-family: NotoSansBold;
+  src: url("../font/noto-sans-bold.ttf"); }
+#trans-button-wrapper {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  -moz-box-shadow: inset 0 0 10px #404040;
+  -webkit-box-shadow: inset 0 0 10px #404040;
+  box-shadow: inset 0 0 10px #404040;
+  background-color: #d4d4dd;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 70%;
+  left: 55%;
+  margin: 10px 10px 5px 5px;
+  display: flex; }
+
+#column-container-wrapper {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  -moz-box-shadow: inset 0 0 10px #404040;
+  -webkit-box-shadow: inset 0 0 10px #404040;
+  box-shadow: inset 0 0 10px #404040;
+  background-color: #d4d4dd;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 45%;
+  bottom: 0;
+  left: 0;
+  margin: 10px 5px 10px 10px;
+  overflow-y: auto;
+  display: flex; }
+
+#trans-result {
+  width: 90%;
+  height: 60%;
+  font-size: 16px;
+  resize: none; }
+
+#trans-result-wrapper {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  -moz-box-shadow: inset 0 0 10px #404040;
+  -webkit-box-shadow: inset 0 0 10px #404040;
+  box-shadow: inset 0 0 10px #404040;
+  background-color: #d4d4dd;
+  overflow: hidden;
+  position: absolute;
+  top: 30%;
+  right: 0;
+  bottom: 0;
+  left: 55%;
+  margin: 5px 10px 10px 5px;
+  display: flex; }
+
+.trans-button {
+  font-family: NotoSansBold, Arial;
+  font-size: 14px;
+  margin: 10px 0 10px 0;
+  width: 12em;
+  height: 2em;
+  display: block; }
+
+.trans-column {
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  line-height: 1;
+  text-align: center;
+  float: left;
+  text-space: 10px;
+  background: #3585b9;
+  border: 1px solid #27556C;
+  width: 2.5vw;
+  box-shadow: 4px 4px 3px #333333;
+  margin: 5px 4px 5px 4px; }
+
+.trans-column:hover {
+  border: 1px solid #081E29;
+  background: #4d99cb; }
+
+#column-container {
+  max-height: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 auto; }
+
+.column-number {
+  background: #e3e3e8;
+  background: -moz-linear-gradient(#f1f1f4, #dcdce3);
+  background: linear-gradient(#f1f1f4, #dcdce3);
+  border-bottom: 1px solid #27556C;
+  line-height: 2;
+  text-align: center; }
+
+.column-letters {
+  padding: 10px 0 10px 0; }
+
+/* This is the div (scrollbox) that the scroll is using. */
+#mCSB_1 {
+  display: inline-block;
+  justify-content: center;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 0;
+  top: 0; }
+
+/* This is where our content is, columns inside the transposition tool. */
+#mCSB_1_container {
+  display: inline-block;
+  vertical-align: middle; }
+
+/* This is the custom scrollbar for transposition tool. */
+#mCSB_1_scrollbar_vertical {
+  margin: 4px 3px 4px 0; }
+
+/* A fake (pseudo) element to align the content vertically */
+#mCSB_1:before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  height: 100%; }
+
+/**
+ * @file Contains style definitions for the substitution tool
+ * @author Eric Henziger <erihe763@student.liu.se>
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ * @author Robert Kumpulainen <robku937@student.liu.se>
+ * @author Kimberley French <kimfr230@student.liu.se>
+ */
+/*
+ * @file Importing this module gives access to all modules.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application color palette.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application font style.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+@font-face {
+  font-family: NotoSansBold;
+  src: url("../font/noto-sans-bold.ttf"); }
+#subst-tool {
+  font-family: monospace;
+  text-transform: uppercase;
+  width: 100%;
+  height: 100%; }
+
+#subst-tool-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px; }
+
+#message-divs, #subst-alphabets {
+  position: relative;
+  background-color: #d4d4dd;
+  -moz-box-shadow: inset 0 0 10px #404040;
+  -webkit-box-shadow: inset 0 0 10px #404040;
+  box-shadow: inset 0 0 10px #404040;
+  padding: 40px;
+  border-radius: 10px;
+  margin: 10px; }
+
+#message-divs {
+  letter-spacing: 0.12em;
+  line-height: 1.5;
+  text-align: center;
+  font-size: 14px; }
+
+#subst-alphabets {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 10px;
+  padding-bottom: 100px; }
+
+/* that is, all spans that are children of divs from #subst-alphabets */
+#subst-alphabets div > span {
+  width: 1.3em;
+  height: 1.3em;
+  display: table-cell;
+  /* for the pretty lined up boxes */
+  box-sizing: border-box;
+  /* one, here comes the resizing combo */
+  vertical-align: middle;
+  /* second */
+  resize: none;
+  /* three, does the trick */
+  text-align: center; }
+
+.normal-alphabet span {
+  background: #3585b9;
+  border: 1px solid #2b343d; }
+
+.normal-alphabet span:hover {
+  border: 1px solid #081E29;
+  background: #4d99cb; }
+
+.normal-alphabet span:active {
+  background: #4d99cb; }
+
+.alphabet-editable span {
+  border: 1px solid #808080;
+  background: #f1f1f4;
+  color: #3585b9; }
+
+.decr-msg-row {
+  color: #3585b9; }
+
+.transparent-letter {
+  transition: opacity 0.5s linear;
+  opacity: 0.3; }
+
+#subst-alphabets .redBackground {
+  background: orangered;
+  transition: background 0.6s linear; }
+
+.defaultBackground {
+  background: default;
+  transition: background 2.0s linear; }
+
+.text-wrapper {
+  font-family: NotoSansBold, Arial;
+  font-size: 14px;
+  text-transform: none;
+  font-weight: bold;
+  color: #081E29; }
+
+/**
+* @file Styling file for Vigenere tool
+* @author Rebecka Geijer Michaeli <rebge882@student.liu.se>
+* @author Robert Kumpulainen <robku937@student.liu.se>
+* @author Kimberley French <kimfr230@student.liu.se>
+*/
+/*
+ * @file Importing this module gives access to all modules.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application color palette.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+/*
+ * @file Contains the application font style.
+ * @author Fredrik Bergstrand <frebe339@student.liu.se>
+ */
+@font-face {
+  font-family: NotoSansBold;
+  src: url("../font/noto-sans-bold.ttf"); }
+#vig-tool-wrapper {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  -moz-box-shadow: inset 0 0 10px #404040;
+  -webkit-box-shadow: inset 0 0 10px #404040;
+  box-shadow: inset 0 0 10px #404040;
+  background-color: #d4d4dd;
+  overflow: hidden;
+  position: absolute;
+  top: 25%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: 5px 10px 10px 10px;
+  overflow-y: hidden; }
+
+#vig-result {
+  resize: none;
+  height: 70%;
+  width: 70%;
+  font-size: 16px; }
+
+#vig-result-wrapper {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  border-radius: 10px;
+  justify-content: center;
+  align-items: center;
+  -moz-box-shadow: inset 0 0 10px #404040;
+  -webkit-box-shadow: inset 0 0 10px #404040;
+  box-shadow: inset 0 0 10px #404040;
+  background-color: #d4d4dd;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 75%;
+  left: 0;
+  margin: 10px 10px 5px 10px;
+  display: flex; }
+
+#vig-key-area {
+  width: 70%;
+  margin: 2% 14% 2% 16%; }
+
+#vig-key-area > div {
+  display: inline-block;
+  vertical-align: middle; }
+
+#vig-buttons {
+  width: 7%; }
+
+#vig-buttons > div {
+  margin-bottom: 3px;
+  line-height: 1.7em;
+  box-sizing: border-box;
+  background: #e3e3e8;
+  background: -moz-linear-gradient(#f1f1f4, #dcdce3);
+  background: linear-gradient(#f1f1f4, #dcdce3);
+  border: 1px solid #999999;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  font-size: larger;
+  font-weight: bold; }
+
+#vig-buttons > div:hover {
+  border: 1px solid #737373; }
+
+#vig-buttons > div:active {
+  background: #dcdce3;
+  background: -moz-linear-gradient(#dcdce3, #f1f1f4);
+  background: linear-gradient(#dcdce3, #f1f1f4); }
+
+#vig-button-reset-wrapper {
+  position: relative;
+  top: 0;
+  right: 0; }
+
+.button-plus {
+  position: relative;
+  float: top; }
+
+.button-minus {
+  position: relative;
+  float: bottom; }
+
+#vig-key {
+  width: 90%; }
+
+.vigenere-key {
+  background: #3585b9;
+  border: 1px solid #2b343d;
+  width: 4vw;
+  height: 4vw;
+  display: table-cell;
+  /* for the pretty lined up boxes */
+  box-sizing: border-box;
+  /* one, here comes the resizing combo */
+  vertical-align: middle;
+  /* second */
+  resize: none;
+  /* three, does the trick */
+  text-align: center; }
+
+.vigenere-key:hover {
+  border: 1px solid #081E29;
+  background: #4d99cb; }
+
+.vig-active-letter {
+  background: #4d99cb;
+  outline: 0px solid transparent; }
+
+.vig-active-letter:hover {
+  border: 1px solid #2b343d; }
+
+#vig-graph-area {
+  margin-left: 5px;
+  margin-right: 5px; }
+
+.vig-inner-graph-area {
+  width: 100%;
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+#vig-movable-graph {
+  margin-left: 20px;
+  margin-right: 20px; }
+
+.vig-inner-graph-area > div {
+  display: inline-block; }
+
+.vig-shift-button {
+  width: 10%;
+  height: 8.0em;
+  line-height: 8.0em; }
+
+.vig-left-shift-button {
+  width: 0;
+  height: 0;
+  border-top: 10vh solid transparent;
+  border-bottom: 10vh solid transparent;
+  border-right: 30px solid #4d99cb; }
+
+.vig-right-shift-button {
+  width: 0;
+  height: 0;
+  border-top: 10vh solid transparent;
+  border-bottom: 10vh solid transparent;
+  border-left: 30px solid #4d99cb; }
+
+.blur-active {
+  opacity: 0.8;
+  -webkit-filter: blur(2px);
+  -moz-filter: blur(2px);
+  -o-filter: blur(2px);
+  -ms-filter: blur(2px);
+  filter: blur(2px); }
+
+.vig-left-shift-button:not(.blur-active):hover {
+  border-right: 30px solid #7CB5EC; }
+
+.vig-right-shift-button:not(.blur-active):hover {
+  border-left: 30px solid #7CB5EC; }
+
+.vig-highchart {
+  height: 25vh;
+  width: 70%; }
+
+/* fixes highchart overflow in bottom graph */
+.highcharts-container {
+  width: 100% !important;
+  /* fixme/todo: do not use !important */
+  height: 100% !important;
+  overflow: hidden; }
+
+/* This is the div (scrollbox) that the scroll is using inside util-tools */
+#mCSB_3 {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  right: 0;
+  top: 0; }
+
+/* This is where our content is, our graphs. */
+#mCSB_3_container {
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  right: 0; }
+
+/* This is the custom scrollbar for util-tools. */
+#mCSB_3_scrollbar_vertical {
+  margin: 4px 3px 4px 0; }
+
+/* Vendor stylesheets */
+
+/*# sourceMappingURL=main.css.map */
