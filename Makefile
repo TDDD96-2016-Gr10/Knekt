@@ -19,6 +19,7 @@ build:
 	# Add a script tag in index.html for our compiled code, just before '</head>'
 	sed 's/<\/head>/\ \ <script src="js\/knekt.min.js"><\/script><\/head>/g' dist/index.html > tmp; mv tmp dist/index.html
 
+	cp app/legal.html dist/legal.html
 
 	# Copy CSS files to dist/css and resource files to dist/res
 	cp app/favicon.ico dist/favicon.ico

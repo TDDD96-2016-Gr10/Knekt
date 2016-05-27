@@ -2,8 +2,13 @@
 
 Knekt is an interactive web application inteded to be used as an aid
 for teaching classical encryption methods and their weaknesses.
-## Directory structure
 
+## Why is the application called Knekt?
+Because Knekt is a pun on the Swedish word "knäckt", which translates into
+cracked. This so happens to be exactly what the encrypted texts should be after
+having faced this application coupled with your excellent decryption skills.
+
+## Directory structure
 ### app/
 The app/ directory is where you'll find the development code.
 Subdirectories are:
@@ -72,7 +77,7 @@ We want you to become a ~~cryptoad~~ contributor as well. Have a look at
 ## License
 Knekt is licensed under the MIT license. However, Knekt is distributed
 with non-free components that permits non-commercial use. Remove
-highcharts if you wish to use this software for commercial purposes.
-See [todo: highcharts license](:todo)
+[Highcharts](https://highcharts.com) if you wish to use this software for
+commercial purposes.
 
 See [LICENSE](LICENSE.txt) for further details.
