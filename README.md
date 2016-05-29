@@ -68,7 +68,7 @@ To generate a new build in the dist/ directory, run *make*. See the
 - Oscar Johansson
 - [Robert Kumpulainen](https://github.com/robrnen)
 - Erik Rönmark
-- Kristoffer Tennivaara
+- [Kristoffer Tennivaara](https://github.com/KristofferTennivaara)
 - [Victor Tranell](https://github.com/victortranell)
 
 We want you to become a ~~cryptoad~~ contributor as well. Have a look at
